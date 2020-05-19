@@ -25,9 +25,9 @@ namespace IBL.Core.Models
             {
                 double valorX = 0, valorY = 0;
                 if(XNumeric)
-                    valorX = item.X.ValorNumerico / (MaiorX - MenorX);
+                    valorX = (item.X.ValorNumerico - MenorX) / (MaiorX - MenorX);
                 if(YNumeric)
-                    valorY = item.Y.ValorNumerico / (MaiorY - MenorY);
+                    valorY = (item.Y.ValorNumerico - MenorY) / (MaiorY - MenorY);
 
                 Itens.Add(new ItemNormalizado
                 {

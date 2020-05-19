@@ -87,9 +87,9 @@ namespace IBL.Core.Engine
 
             double valorX = 0, valorY = 0;
             if (item.X.IsNumeric())
-                valorX = item.X.ValorNumerico / (_dataset.MaiorX - _dataset.MenorX);
+                valorX = (item.X.ValorNumerico - _dataset.MenorX) / (_dataset.MaiorX - _dataset.MenorX);
             if (item.Y.IsNumeric())
-                valorY = item.Y.ValorNumerico / (_dataset.MaiorY - _dataset.MenorY);
+                valorY = (item.Y.ValorNumerico - _dataset.MenorY)  / (_dataset.MaiorY - _dataset.MenorY);
 
             return new ItemNormalizado
             {

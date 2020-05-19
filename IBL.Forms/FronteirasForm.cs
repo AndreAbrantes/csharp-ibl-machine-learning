@@ -54,6 +54,11 @@ namespace IBL.Forms
             }
         }
 
+        private double Incremento(double referencia)
+        {
+            return referencia / 100;
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             ChartControl pointChart = new ChartControl();
@@ -65,10 +70,11 @@ namespace IBL.Forms
             serieClass.ShowInLegend = false;
             serieClass.ArgumentScaleType = ScaleType.Auto;
 
-            var incremento = _ibl._dataset.MaiorX > 100 ? 10000 : 1;
+            var incrementoX = Incremento(_ibl._dataset.MaiorX - _ibl._dataset.MenorX); 
+            var incrementoY = Incremento(_ibl._dataset.MaiorY - _ibl._dataset.MenorY); 
 
-            for (var i = _ibl._dataset.MenorX - 10; i < _ibl._dataset.MaiorX + 10; i = i + incremento)
-                for (var j = _ibl._dataset.MenorY - 10; j < _ibl._dataset.MaiorY + 10; j = j + incremento)
+            for (var i = _ibl._dataset.MenorX - (incrementoX * 10); i < _ibl._dataset.MaiorX + (incrementoX * 10); i = i + incrementoX)
+                for (var j = _ibl._dataset.MenorY - (incrementoY * 10); j < _ibl._dataset.MaiorY + (incrementoY * 10); j = j + incrementoY)
                 {
                     var item = new Item
                     {

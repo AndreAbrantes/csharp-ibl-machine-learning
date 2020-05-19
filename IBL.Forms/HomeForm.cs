@@ -122,5 +122,53 @@ namespace IBL.Forms
             this.Hide();
             new FronteirasForm(_ibl, this).Show();
         }
+
+        private void btnImportarTxt_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.Title = "Importar TXT";
+            openFileDialog1.FileName = "";
+            openFileDialog1.Filter = "Text File|*.txt";
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                var itens = LerTxt(openFileDialog1.FileName);
+
+                _ibl.CarregarDados(itens);
+
+                var classes = itens.GroupBy(x => x.Classe).Select(x => new
+                {
+                    Classe = x.Key,
+                    Quantidade = x.Count()
+                });
+
+                lblImportar.Text = $"Importação OK - {itens.Count} exemplos\n";
+                foreach (var item in classes)
+                    lblImportar.Text += $"{item.Classe} -> {item.Quantidade} exemplos\n";
+            }
+            else
+            {
+                lblImportar.Text = "";
+            }
+        }
+
+        private List<Item> LerTxt(string fileName)
+        {
+            var lstItens = new List<Item>();
+            string[] lines = System.IO.File.ReadAllLines(fileName);
+
+            for (var iRow = 1; iRow < lines.Length; iRow++)
+            {
+                var linha = lines[iRow].Split(',');
+                var incremento = linha.Length == 3 ? 0 : 1;
+                lstItens.Add(new Item
+                {
+                    X = new Atributo { Valor = linha[0 + incremento].Replace('.', ',') },
+                    Y = new Atributo { Valor = linha[1 + incremento].Replace('.', ',') },
+                    Classe = linha[2 + incremento].Replace("\"", "")
+                }); ;
+            }
+
+            return lstItens;
+        }
     }
 }

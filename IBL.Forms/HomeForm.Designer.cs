@@ -40,15 +40,16 @@
             this.lblClassificacao = new System.Windows.Forms.Label();
             this.btnFronteiras = new System.Windows.Forms.Button();
             this.lblLeave = new System.Windows.Forms.Label();
+            this.btnImportarTxt = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnImportar
             // 
-            this.btnImportar.Location = new System.Drawing.Point(41, 41);
+            this.btnImportar.Location = new System.Drawing.Point(12, 40);
             this.btnImportar.Name = "btnImportar";
-            this.btnImportar.Size = new System.Drawing.Size(75, 23);
+            this.btnImportar.Size = new System.Drawing.Size(86, 23);
             this.btnImportar.TabIndex = 0;
-            this.btnImportar.Text = "Importar";
+            this.btnImportar.Text = "Importar Excel";
             this.btnImportar.UseVisualStyleBackColor = true;
             this.btnImportar.Click += new System.EventHandler(this.btnImportar_Click);
             // 
@@ -142,11 +143,22 @@
             this.lblLeave.Size = new System.Drawing.Size(0, 13);
             this.lblLeave.TabIndex = 10;
             // 
+            // btnImportarTxt
+            // 
+            this.btnImportarTxt.Location = new System.Drawing.Point(122, 40);
+            this.btnImportarTxt.Name = "btnImportarTxt";
+            this.btnImportarTxt.Size = new System.Drawing.Size(83, 23);
+            this.btnImportarTxt.TabIndex = 11;
+            this.btnImportarTxt.Text = "Importar TXT";
+            this.btnImportarTxt.UseVisualStyleBackColor = true;
+            this.btnImportarTxt.Click += new System.EventHandler(this.btnImportarTxt_Click);
+            // 
             // HomeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(868, 450);
+            this.Controls.Add(this.btnImportarTxt);
             this.Controls.Add(this.lblLeave);
             this.Controls.Add(this.btnFronteiras);
             this.Controls.Add(this.lblClassificacao);
@@ -179,5 +191,6 @@
         private System.Windows.Forms.Label lblClassificacao;
         private System.Windows.Forms.Button btnFronteiras;
         private System.Windows.Forms.Label lblLeave;
+        private System.Windows.Forms.Button btnImportarTxt;
     }
 }

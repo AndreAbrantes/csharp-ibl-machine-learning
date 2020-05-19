@@ -36,7 +36,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Name = "FronteirasForm";
-            this.Text = "Form1";
+            this.Text = "Fronteiras";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FronteirasForm_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Leave += new System.EventHandler(this.FronteirasForm_Leave);
