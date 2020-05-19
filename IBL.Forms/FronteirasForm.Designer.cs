@@ -1,6 +1,6 @@
-﻿namespace IBL.Application
+﻿namespace IBL.Forms
 {
-    partial class Form1
+    partial class FronteirasForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,14 +30,16 @@
         {
             this.SuspendLayout();
             // 
-            // Form1
+            // FronteirasForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Name = "Form1";
+            this.Name = "FronteirasForm";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FronteirasForm_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Leave += new System.EventHandler(this.FronteirasForm_Leave);
             this.ResumeLayout(false);
 
         }

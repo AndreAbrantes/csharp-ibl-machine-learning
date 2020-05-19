@@ -103,5 +103,10 @@ namespace IBL.Core.Engine
         {
             return _dataset.Itens.GroupBy(x => x.ItemOriginal.Classe).Select(x => x.Key).ToArray();
         }
+
+        public void TreinoLeaveOneOut()
+        {
+            //COLOCAR TREINO AQUI
+        }
     }
 }
