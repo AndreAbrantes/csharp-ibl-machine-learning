@@ -24,6 +24,8 @@ namespace IBL.Forms
 
         private void btnImportar_Click(object sender, EventArgs e)
         {
+            lblImportar.Text = "";
+            lblLeave.Text = "";
             openFileDialog1.Title = "Importar Excel";
             openFileDialog1.FileName = "";
             openFileDialog1.Filter = "Excel File|*.xlsx;*.xls";
@@ -81,23 +83,9 @@ namespace IBL.Forms
 
         private void btnTreinar_Click(object sender, EventArgs e)
         {
-            var acertos = 0;
-            var erros = 0;
-            for(int i = 0; i < _ibl._dataset.Itens.Count; i++)
-            {
-                var oneOut = _ibl._dataset.Itens[i];
-                var newDataset = new ClassificadorIbl();
-                newDataset.CarregarDados(_ibl._dataset.Itens.Where(x => x != oneOut).Select(x => x.ItemOriginal));
-
-                var classificacao = newDataset.Classificar(oneOut.ItemOriginal);
-
-                if (classificacao.ItemOriginal.Classe == oneOut.ItemOriginal.Classe)
-                    acertos++;
-                else
-                    erros++;
-            }
-
-            decimal total = acertos + erros;
+            lblLeave.Text = "";
+           var leaveOneOut = new LeaveOneOut();
+           var (acertos, erros, total) = leaveOneOut.Fazer(_ibl._dataset.Itens);
 
             lblLeave.Text = "COMPLETO!\n";
             lblLeave.Text += $"Acertos: {acertos} ({(100 * acertos / total):N2}%)\n";
@@ -125,6 +113,8 @@ namespace IBL.Forms
 
         private void btnImportarTxt_Click(object sender, EventArgs e)
         {
+            lblImportar.Text = "";
+            lblLeave.Text = "";
             openFileDialog1.Title = "Importar TXT";
             openFileDialog1.FileName = "";
             openFileDialog1.Filter = "Text File|*.txt";

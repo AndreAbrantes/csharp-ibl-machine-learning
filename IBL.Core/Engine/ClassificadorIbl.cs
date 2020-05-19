@@ -18,6 +18,7 @@ namespace IBL.Core.Engine
 
         public Dataset NormalizarDataset(IEnumerable<Item> itensTreinamento)
         {
+            //verifica se os atributos do dataset são numéricos
             var xNumeric = itensTreinamento.All(x => x.X.IsNumeric());
             var yNumeric = itensTreinamento.All(x => x.Y.IsNumeric());
             double maiorItemX = 0;
@@ -25,6 +26,7 @@ namespace IBL.Core.Engine
             double maiorItemY = 0;
             double menorItemY = 0;
 
+            //caso sejam, é setado o maior e o menor valor dos itens
             if (xNumeric)
             {
                 maiorItemX = itensTreinamento.Max(x => x.X.ValorNumerico);
@@ -47,6 +49,7 @@ namespace IBL.Core.Engine
                 MenorY = menorItemY
             };
 
+            //os itens que vieram do dataset são normalizados
             dataset.AdicionarItensENormalizar(itensTreinamento);
 
             return dataset;
@@ -55,12 +58,16 @@ namespace IBL.Core.Engine
         public ItemNormalizado Classificar(Item novoItem)
         {
             var calculadoraDistancia = new DistanciaEuclidiana();
+            //Item a ser classificado é normalizado
             var itemNormalizado = Normalizar(novoItem);
             double? menorDistancia = null;
             ItemNormalizado itemMenorDistancia = null;
 
+            //os itens do dataset são percorridos para acharmos o item que possui a menor distância
+            //em relação ao item a ser classificado
             foreach (var item in _dataset.Itens)
             {
+                //Calcula a distância euclidiana dos itens
                 var distancia = calculadoraDistancia.CalcularDistanciaEuclidiana(
                     item, itemNormalizado, _dataset.XNumeric, _dataset.YNumeric
                 );
@@ -79,34 +86,19 @@ namespace IBL.Core.Engine
                 }
             }
 
+            //retorna o item do dataset que possui a menor distância
             return itemMenorDistancia;
         }
 
         private ItemNormalizado Normalizar(Item item)
         {
-
-            double valorX = 0, valorY = 0;
-            if (item.X.IsNumeric())
-                valorX = (item.X.ValorNumerico - _dataset.MenorX) / (_dataset.MaiorX - _dataset.MenorX);
-            if (item.Y.IsNumeric())
-                valorY = (item.Y.ValorNumerico - _dataset.MenorY)  / (_dataset.MaiorY - _dataset.MenorY);
-
-            return new ItemNormalizado
-            {
-                ItemOriginal = item,
-                ValorX = valorX,
-                ValorY = valorY
-            };
+            var normalizador = new Normalizador(_dataset);
+            return normalizador.Normalizar(item);
         }
 
         public string[] Classes()
         {
             return _dataset.Itens.GroupBy(x => x.ItemOriginal.Classe).Select(x => x.Key).ToArray();
-        }
-
-        public void TreinoLeaveOneOut()
-        {
-            //COLOCAR TREINO AQUI
         }
     }
 }
